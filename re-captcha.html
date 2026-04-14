@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vérification</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #f1f1f1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* box */
+.box {
+    background: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    width: 320px;
+}
+
+/* recaptcha */
+.recaptcha {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* square */
+.square {
+    width: 22px;
+    height: 22px;
+    border: 2px solid #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* spinner */
+.spinner {
+    width: 16px;
+    height: 16px;
+    border: 3px solid #ccc;
+    border-top: 3px solid #2196f3;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    display: none;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+/* logo */
+.logo img {
+    width: 35px;
+}
+
+/* button continuer */
+#continueBtn {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    background: gray;
+    color: white;
+    border: none;
+    cursor: not-allowed;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<div class="recaptcha">
+    <div class="left">
+        <div class="square" onclick="start()" id="box">
+            <div class="spinner" id="spin"></div>
+        </div>
+        <span id="text">Je ne suis pas un robot</span>
+    </div>
+
+    <div class="logo">
+        <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png">
+    </div>
+</div>
+
+<button id="continueBtn" onclick="go()" disabled>Continuer</button>
+
+</div>
+
+<script>
+function start() {
+    let spin = document.getElementById("spin");
+    let text = document.getElementById("text");
+
+    spin.style.display = "block";
+    text.innerHTML = "Vérification...";
+
+    // ⏳ 20 ثانية
+    setTimeout(() => {
+        text.innerHTML = "✔ Vérifié";
+
+        let btn = document.getElementById("continueBtn");
+        btn.disabled = false;
+        btn.style.background = "#00c9a7";
+        btn.style.cursor = "pointer";
+
+    }, 40000);
+}
+
+function go() {
+    window.location.href = "choix.html";
+}
+</script>
+
+</body>
+</html>
