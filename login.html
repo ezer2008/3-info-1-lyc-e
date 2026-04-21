@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>تسجيل الدخول</title>
+
+<style>
+body{
+    background:url("https://images.unsplash.com/photo-1509062522246-3755977927d7") no-repeat center/cover;
+    text-align:center;
+    color:white;
+}
+
+.box{
+    margin-top:100px;
+    background:rgba(0,0,80,0.8);
+    padding:30px;
+    border-radius:20px;
+    display:inline-block;
+}
+
+input{
+    display:block;
+    margin:10px auto;
+    padding:10px;
+    border-radius:10px;
+    border:none;
+}
+
+button{
+    padding:10px 20px;
+    border:none;
+    border-radius:10px;
+    background:#00d4ff;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h2>تسجيل الدخول</h2>
+
+<input type="email" id="email" placeholder="ادخل البريد الإلكتروني">
+<input type="password" id="pass" placeholder="كلمة المرور">
+
+<button onclick="login()">دخول</button>
+</div>
+
+<script>
+let users = JSON.parse(localStorage.getItem("users")) || [];
+
+function login(){
+    let email = document.getElementById("email").value;
+    let pass = document.getElementById("pass").value;
+
+    let found = users.find(u => u.email === email && u.pass === pass);
+
+    if(found){
+        alert("✅ مرحبا " + found.name);
+    }else{
+        alert("❌ خطأ");
+    }
+}
+</script>
+
+</body>
+</html>

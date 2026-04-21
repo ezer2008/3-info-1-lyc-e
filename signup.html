@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>إنشاء حساب</title>
+
+<style>
+body{
+    background:linear-gradient(45deg,#00c9ff,#007bff);
+    text-align:center;
+    color:white;
+}
+
+.box{
+    margin-top:80px;
+    background:rgba(255,255,255,0.1);
+    padding:30px;
+    border-radius:20px;
+    display:inline-block;
+}
+
+input{
+    display:block;
+    margin:10px auto;
+    padding:10px;
+    border-radius:10px;
+    border:none;
+}
+
+button{
+    padding:10px 20px;
+    border:none;
+    border-radius:10px;
+    background:#00ffc3;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h2>إنشاء حساب</h2>
+
+<input type="text" id="name" placeholder="الاسم">
+<input type="text" id="lastname" placeholder="اللقب">
+<input type="email" id="email" placeholder="Gmail (@)">
+<input type="password" id="pass" placeholder="كلمة المرور (8+)">
+
+<button onclick="signup()">تسجيل</button>
+</div>
+
+<script>
+let users = JSON.parse(localStorage.getItem("users")) || [];
+
+function signup(){
+    let name = document.getElementById("name").value;
+    let lastname = document.getElementById("lastname").value;
+    let email = document.getElementById("email").value;
+    let pass = document.getElementById("pass").value;
+
+    if(!email.includes("@")){
+        alert("❌ لازم @");
+        return;
+    }
+
+    if(pass.length < 8){
+        alert("❌ 8 حروف");
+        return;
+    }
+
+    users.push({name, lastname, email, pass});
+    localStorage.setItem("users", JSON.stringify(users));
+
+    alert("✅ تم التسجيل");
+}
+</script>
+
+</body>
+</html>
